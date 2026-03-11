@@ -1,109 +1,149 @@
-# COREUS FRAMEWORK (Showcase Edition)
-**Agentic Infrastructure Framework**
+<div align="center">
 
-> **⚠️ NOTE:** This repository is a public showcase of the Coreus Framework. It demonstrates the architectural philosophy, core interfaces, and abstraction layers designed for high-reliability AI systems. The proprietary execution engines and internal mechanisms are not included in this reference distribution.
+# ⚙️ Coreus Framework
+**The infrastructure layer for production-grade agentic systems.**
 
----
-
-## Strategic Vision
-
-COREUS is an infrastructure architecture designed to standardize the development of complex AI agent systems. It provides a robust infrastructure for building scalable, secure, and predictable autonomous workflows.
-
-Instead of reinventing the wheel for every project, Coreus offers a pre-validated structure where **engineering teams** can plug in their **Business Logic** and start running immediately.
-
-### The Smart Infrastructure Concept
-In the software world, you often have to choose between two extremes:
-
-*   **Low-Level Libraries:** They give you **bricks and mortar**; what you build and how you ensure its safety is entirely up to you. This flexibility is liberating but exhausting.
-*   **High-Level Agent Tools:** Like a **prefabricated house**; fast to set up, but often impossible to change the walls.
-
-> **COREUS provides you with a "Smart Building Skeleton".**
-> On this solid and secure infrastructure, you can freely build your own rooms—your **Business Logic**.
+![GitHub Stars](https://img.shields.io/github/stars/your-org/coreus?style=for-the-badge&logo=github&color=gold)
+![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
+![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg?style=for-the-badge&logo=python&logoColor=white)
+![Type](https://img.shields.io/badge/Type-Framework-8e44ad.svg?style=for-the-badge)
+![Status](https://img.shields.io/badge/Status-Showcase-gray.svg?style=for-the-badge)
 
 ---
 
-## The Challenge of Agentic Systems
+**[Overview](#-overview) • [The Problem](#-the-problem) • [Architecture](#-architecture) • [Core Components](#-core-components) • [Tech Stack](#-tech-stack)**
 
-Building a single AI agent is easy. Orchestrating a team of agents that must maintain state, handle failures, and correct themselves over days of operation is exponentially harder. 
-
-Coreus addresses three fundamental problems that arise in production:
-1.  **State Drift:** How do you keep 5 agents in sync when one fails?
-2.  **Context Corruption:** How do you prevent hallucination when specific memory leaks into the wrong session?
-3.  **Silent Failures:** How do you detect when an agent returns a "valid" but semantically incorrect answer?
-
-> Coreus solves these not with more prompts, but with **Software Engineering**.
+</div>
 
 ---
 
-## Architectural Philosophy & Solution
+> ⚠️ **Showcase Edition** — This repository exposes the architectural philosophy, core interfaces, and abstraction layers of the Coreus Framework. Proprietary execution engines and internal mechanisms are not included in this reference distribution.
 
-The framework is built on specific engineering principles aimed at operational excellence.
+---
 
-### 1. Flexible Orchestration
-Unlike traditional sequential chains, Coreus utilizes a **Stateful Flow Engine**. The engine supports flexible orchestration where loops, parallel branches, and dynamic rerouting are first-class citizens. The execution state is immutable, enabling reliable history tracking.
+**Coreus** is a production-grade **Agentic Infrastructure Framework** designed to standardize the development of complex, multi-agent AI systems. Rather than reinventing reliability primitives for every project, Coreus provides a pre-validated structural foundation where engineering teams plug in their **business logic** and ship — without fighting the infrastructure.
 
-### 2. Sandbox Memory Architecture
-Memory is treated as a **Unified Context Store**.
-*   **Data Integrity:** The storage layer enforces strict transactional boundaries. Partial corruption is strictly prevented.
-*   **Semantic Isolation:** Each user session is sandboxed, preventing context leakage.
+Unlike high-level agent tools that give you a prefabricated house with unmovable walls, and unlike low-level libraries that hand you raw bricks, Coreus provides the **structural skeleton**: solid, secure, and fully extensible.
 
-### 3. Intelligent Flow & Stability
-Real intelligence is iterative. Critical infrastructure is protected by **architectural safeguards** to gracefully degrade service rather than crashing under load, converting fatal errors into manageable state transitions.
+---
+
+## 🔥 The Problem
+
+Building a single AI agent is straightforward. Orchestrating a team of agents that must maintain shared state, handle failures gracefully, and self-correct over extended operation is a different class of problem entirely.
+
+Three failure modes emerge at production scale — and they are not solved by better prompts:
+
+- **🌀 State Drift** — How do you keep 5 agents synchronized when one fails mid-task?
+- **🧠 Context Corruption** — How do you prevent hallucination when session memory leaks across contexts?
+- **🔇 Silent Failures** — How do you detect when an agent returns a *valid-looking* but semantically incorrect response?
+
+> Coreus solves these with **software engineering**, not prompt engineering.
+
+---
+
+## 🏗 Architecture
+
+The framework is built on three engineering principles, each targeting a specific class of production failure.
 
 ```mermaid
 graph TD
     Client[Client Request] --> Engine{Coreus Engine}
-    
-    subgraph "Orchestration"
+
+    subgraph Orchestration [Orchestration Layer]
         Engine --> Stage1[Processing Stage]
         Stage1 --> Stage2[Synthesis Stage]
         Stage2 --> Gate{Quality Gate}
         Gate -->|Pass| Final[Response]
         Gate -->|Fail| Stage1
     end
-    
-    subgraph "Core Capabilities"
+
+    subgraph Core [Core Capabilities]
         Stage2 --> Memory[(Context Store)]
         Stage2 --> Tools[Safe Tooling]
     end
 ```
 
----
+### 🔁 Stateful Flow Engine
 
-## Real-World Scenarios & Solutions
+Unlike sequential chains, Coreus uses a **Stateful Flow Engine** where loops, parallel branches, and dynamic rerouting are first-class primitives. Execution state is immutable — enabling reliable history tracking, replay, and audit without additional instrumentation.
 
-> **Scenario 1: The E-Commerce Integrator (Safety First)**
-> *   **Situation:** Implementing a "Style Consultant" bot carries brand risk if the AI hallucinates.
-> *   **Coreus Effect:** Teams use **internal validation policies** to check agent suggestions before showing them to the user. Wrong answers are corrected within the system loop without ever reaching the frontend.
+### 🗄️ Sandbox Memory Architecture
 
-> **Scenario 2: The Scale-Up Crisis (Stability)**
-> *   **Situation:** A prototype script works perfectly for 10 users but crashes as traffic hits thousands due to race conditions and API timeouts.
-> *   **Coreus Effect:** The **Infrastructure-level stability patterns** keep the system standing under load. Memory isolation ensures a safe transition from prototype to production without requiring an architectural rewrite.
+Memory is treated as a **Unified Context Store** with transactional boundaries. Partial writes are prevented at the storage layer. Each session is strictly sandboxed — context from one user or task cannot leak into another, eliminating an entire class of hallucination failure.
 
----
+### 🛡️ Architectural Safeguards
 
-## Use Cases: Development Journey
-
-> **Use Case A: "Solo Entrepreneur"**
-> *   **Goal:** Build a personal "Legal Advisor Bot".
-> *   **Process:** The entrepreneur activates Coreus's memory module and sets the rules.
-> *   **Result:** Without dealing with infrastructure code, they launch a professional SaaS product focusing only on legal knowledge.
-
-> **Use Case B: "Legacy Transformation"**
-> *   **Goal:** Add AI capability to a huge legacy transaction system.
-> *   **Process:** The team uses Coreus's **Routing** structure. Simple transactions go to the old system, complex analyses to Coreus agents.
-> *   **Result:** A safe hybrid transition without discarding the current system.
+Critical paths are protected by infrastructure-level stability patterns. Rather than crashing under load or API timeouts, the engine gracefully degrades — converting fatal errors into manageable state transitions. The system recovers; it does not restart.
 
 ---
 
-## Core Components (Public Interfaces)
+## 🧩 Core Components
 
 This repository exposes the foundational abstractions of the framework:
 
-1.  **Abstractions:** Base classes for Agents and Tools.
-2.  **Typing:** Standardized data models for inter-agent communication.
-3.  **Interfaces:** Definitions for Memory and Evaluation modules.
+- **🤖 Agent Abstractions** — Base classes defining the agent lifecycle: initialization, tool access, state transitions, and teardown. Business logic slots in; infrastructure is inherited.
+- **🔧 Tool Interface** — Standardized wrappers for external tool integration with built-in rate limiting, retry logic, and error classification.
+- **💾 Memory Interface** — Pluggable context store definitions. Swap backends (in-memory, Redis, vector store) without touching agent logic.
+- **✅ Evaluation Interface** — Quality gate contracts for validating agent outputs before they propagate downstream — catching semantic errors, not just exceptions.
+- **📐 Typing Layer** — Shared data models for inter-agent communication. Strict schemas prevent malformed payloads from silently corrupting downstream state.
 
 ---
 
+## ⚡ Real-World Scenarios
+
+> **🛒 E-Commerce — Safety First**
+> A "Style Consultant" agent carries brand risk if it hallucinates product recommendations. Coreus's **internal validation policies** intercept agent suggestions before they reach the frontend. Wrong answers are corrected within the system loop — users never see them.
+
+> **📈 Scale-Up — From Prototype to Production**
+> A script that works for 10 users crashes at thousands due to race conditions and API timeouts. Coreus's **infrastructure-level stability patterns** absorb load without architectural rewrites. Memory isolation ensures the prototype's logic survives the transition intact.
+
+> **🏛️ Legacy Integration — Safe Hybrid Transition**
+> A large legacy transaction system needs AI capability without a full rewrite. Coreus's **routing layer** splits traffic: simple transactions go to the existing system, complex analyses route to Coreus agents. Both systems run in parallel until full migration.
+
+---
+
+## 🛠 Tech Stack
+
+<div align="center">
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/python/python-original.svg" height="40" alt="python" />
+  &nbsp;&nbsp;
+  <img src="https://raw.githubusercontent.com/devicons/devicon/master/icons/redis/redis-original.svg" height="40" alt="redis" />
+  &nbsp;&nbsp;
+  <img src="https://openai.com/favicon.ico" height="40" alt="openai" />
+</div>
+
+<br/>
+
+- **Orchestration:** Stateful Flow Engine (custom)
+- **Memory Backends:** In-memory · Redis · Vector Store (pluggable)
+- **Quality Gates:** Configurable validation policy layer
+- **LLM Adapters:** OpenAI · Anthropic · local models (via unified interface)
+- **Typing:** Pydantic v2
+
+---
+
+## 📂 Project Structure
+
+```text
+coreus/
+├── abstractions/     # Agent and Tool base classes
+├── typing/           # Shared data models for inter-agent communication
+├── interfaces/       # Memory, Evaluation, and Routing contracts
+├── engine/           # Flow engine core (partial — showcase edition)
+└── examples/         # Reference implementations
+```
+
+---
+
+<div align="center">
+
+<br/>
+
+*Building reliable agents is not a prompting problem.*
+*It is an engineering problem — and Coreus is the foundation.*
+
+<br/>
+
 *Coreus Framework Reference Architecture © 2026*
+
+</div>
