@@ -3,7 +3,7 @@
 # ⚙️ Coreus Framework
 **The infrastructure layer for production-grade agentic systems.**
 
-![GitHub Stars](https://img.shields.io/github/stars/your-org/coreus?style=for-the-badge&logo=github&color=gold)
+![GitHub Stars](https://img.shields.io/github/stars/hasankirtas/coreus-framework-showcase?style=for-the-badge&logo=github&color=gold)
 ![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg?style=for-the-badge)
 ![Python](https://img.shields.io/badge/Python-3.11%2B-blue.svg?style=for-the-badge&logo=python&logoColor=white)
 ![Type](https://img.shields.io/badge/Type-Framework-8e44ad.svg?style=for-the-badge)
@@ -21,7 +21,7 @@
 
 ---
 
-**Coreus** is a production-grade **Agentic Infrastructure Framework** designed to standardize the development of complex, multi-agent AI systems. Rather than reinventing reliability primitives for every project, Coreus provides a pre-validated structural foundation where engineering teams plug in their **business logic** and ship — without fighting the infrastructure.
+**Coreus** is a LangGraph-based production-grade **Agentic Infrastructure Framework** designed to standardize the development of complex, multi-agent AI systems. Rather than reinventing reliability primitives for every project, Coreus provides a pre-validated structural foundation where engineering teams plug in their **business logic** and ship — without fighting the infrastructure.
 
 Unlike high-level agent tools that give you a prefabricated house with unmovable walls, and unlike low-level libraries that hand you raw bricks, Coreus provides the **structural skeleton**: solid, secure, and fully extensible.
 
@@ -119,19 +119,6 @@ This repository exposes the foundational abstractions of the framework:
 - **Quality Gates:** Configurable validation policy layer
 - **LLM Adapters:** OpenAI · Anthropic · local models (via unified interface)
 - **Typing:** Pydantic v2
-
----
-
-## 📂 Project Structure
-
-```text
-coreus/
-├── abstractions/     # Agent and Tool base classes
-├── typing/           # Shared data models for inter-agent communication
-├── interfaces/       # Memory, Evaluation, and Routing contracts
-├── engine/           # Flow engine core (partial — showcase edition)
-└── examples/         # Reference implementations
-```
 
 ---
 
